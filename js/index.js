@@ -92,43 +92,40 @@ window.addEventListener('DOMContentLoaded', () => {
 
         if (radioElement.checked) {
           // code for task 1 goes here
+          if(quizItem.a === i) {
           score++;
+        }
         }
       }
     });
-  document.getElementById('score').innerHTML = score; 
-  //console.log(score); 
+  document.getElementById('score').innerHTML = `Your score is: ${score}`; 
   };
     
-  // call the displayQuiz function
-  displayQuiz();
   const submitButton = document.getElementById('btnSubmit');
   submitButton.addEventListener('click', () => {
     calculateScore();
   });
 
-const resetButton = document.getElementById('btnReset');
-resetButton.addEventListener('click', () => {
-  window.location.reload();
-})
+  const resetButton = document.getElementById('btnReset');
+  resetButton.addEventListener('click', () => {
+    window.location.reload();
+  })
 
-const timerDisplay = document.getElementById('time');
-let timeLeft = 60;
+  const timerDisplay = document.getElementById('time');
+  let timeLeft = 60;
 
-const timerInterval = setInterval (() => {
-  timeLeft--;
-  timerDisplay.textContent = timeLeft;
+  const timerInterval = setInterval (() => {
+    timeLeft--;
+    timerDisplay.textContent = timeLeft;
 
   if (timeLeft <= 0) {
     clearInterval(timerInterval);
-    endQuiz();
+    calculateScore();
+    submitButton.disabled = true;
   }
 }, 1000);
 
-function endQuiz() {
-  submitButton.disabled = true;
-}
-
-
+  // call the displayQuiz function
+  displayQuiz();
 });
 
