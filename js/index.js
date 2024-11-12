@@ -44,6 +44,16 @@ window.addEventListener('DOMContentLoaded', () => {
       o: ['Sydney', 'Canberra', 'Melbourne', 'Perth'],
       a: 1,
     },
+        {
+      q: 'What is the largest country in the world by land area?',
+      o: ['Russia', 'Canada', 'India', 'United States'],
+      a: 0,
+    },
+    {
+      q: 'Which programming language is used to create web pages?',
+      o: ['Java', 'C++', 'JavaScript', 'Python'],
+      a: 2,
+    }
   ];
 
   // function to Display the quiz questions and answers from the object
@@ -76,15 +86,49 @@ window.addEventListener('DOMContentLoaded', () => {
 
         if (quizItem.a == i) {
           //change background color of li element here
+          let li = `li_${index}_${i}`;
+          liElement.style.backgroundColor = 'green';
         }
 
         if (radioElement.checked) {
           // code for task 1 goes here
+          score++;
         }
       }
     });
+  document.getElementById('score').innerHTML = score; 
+  //console.log(score); 
   };
-
+    
   // call the displayQuiz function
   displayQuiz();
+  const submitButton = document.getElementById('btnSubmit');
+  submitButton.addEventListener('click', () => {
+    calculateScore();
+  });
+
+const resetButton = document.getElementById('btnReset');
+resetButton.addEventListener('click', () => {
+  window.location.reload();
+})
+
+const timerDisplay = document.getElementById('time');
+let timeLeft = 60;
+
+const timerInterval = setInterval (() => {
+  timeLeft--;
+  timerDisplay.textContent = timeLeft;
+
+  if (timeLeft <= 0) {
+    clearInterval(timerInterval);
+    endQuiz();
+  }
+}, 1000);
+
+function endQuiz() {
+  submitButton.disabled = true;
+}
+
+
 });
+
